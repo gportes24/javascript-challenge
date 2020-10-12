@@ -22,5 +22,28 @@ tableData.forEach(function(sighting){
 
 let button = d3.select ("#filter-btn")
 button.on("click", function(){
-    tbody.html("");
-})
+    tbody.html("")
+    //from html input class - activiy 9, par form filter
+    // this comes from the html input class id, inputElement
+    let inputElement = d3.select("#datetime")
+    let inputValue = inputElement.property("value")  
+    console.log(inputValue);
+//repeat previous loop for filter data 
+    let filteredData = tableData.filter(aliens =>  aliens.datetime === inputValue ||
+    aliens.city=== inputValue ||
+    aliens.state === inputValue ||
+    aliens.country === inputValue ||
+    aliens.shape === inputValue ||
+    aliens.comments=== inputElement);
+
+    filteredData.forEach(function(choice){
+        let row = tbody.append("tr");
+        Object.entries(choice).forEach(function([key,value]){
+            let cell = row.append("td");
+            cell.text(value);
+        });
+    });
+ 
+});
+
+
